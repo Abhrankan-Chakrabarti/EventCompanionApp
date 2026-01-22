@@ -6,14 +6,15 @@
 
 ## 🌟 Overview
 
-EventCompanionApp is designed to allow people who cannot attend weddings in person to stay connected and involved. This Phase 1 version focuses on building the core foundation of the platform, providing meaningful engagement while laying the groundwork for future expansion.
+EventCompanionApp is designed to allow people who cannot attend weddings in person to stay connected and involved. This **Phase 1** version focuses on building the core foundation of the platform, providing meaningful engagement while laying the groundwork for future expansion.
 
 **Key Features (Phase 1):**
-- **Matrimonial Service Integration** – basic browsing and interest sending for wedding participants.
-- **User Accounts & Verification** – secure signup/login with profile creation and verification.
-- **Payments** – minimal payment integration for premium features or digital gifts.
-- **Private Livestream** – secure livestream for remote guests to watch events live.
-- **Digital Gifting** – virtual gifts that can be sent to the couple.
+
+* **Matrimonial Service Integration** – basic browsing and interest sending for wedding participants.
+* **User Accounts & Verification** – secure signup/login with profile creation and verification.
+* **Payments** – minimal payment integration for premium features or digital gifts.
+* **Private Livestream** – secure livestream for remote guests to watch events live.
+* **Digital Gifting** – virtual gifts that can be sent to the couple.
 
 > This phase focuses on establishing the base functionality quietly, without attracting competition, while preparing the platform for gradual feature expansion in future phases.
 
@@ -21,69 +22,133 @@ EventCompanionApp is designed to allow people who cannot attend weddings in pers
 
 ## ⚙️ Setup Instructions
 
-1. **Clone the repository:**
+### 1️⃣ Clone the repository
+
 ```bash
 git clone https://github.com/Abhrankan-Chakrabarti/EventCompanionApp.git
-````
+cd EventCompanionApp
+```
 
-2. **Install dependencies:**
+---
+
+### 2️⃣ Install dependencies
+
+#### Backend
 
 ```bash
-# example for Node.js backend
 cd backend
 npm install
+```
 
-# example for frontend (if separate)
+#### Frontend
+
+```bash
 cd frontend
 npm install
 ```
 
-3. **Configure environment variables:**
+---
+
+### 3️⃣ Configure environment variables
+
+Create a `.env` file inside the `backend` directory and configure the following:
 
 * `DB_URI` – database connection string
 * `JWT_SECRET` – secret key for authentication
-* `PAYMENT_GATEWAY_KEY` – for payment integration
-* `STREAM_API_KEY` – for livestream service
+* `PAYMENT_GATEWAY_KEY` – payment gateway API key
+* `STREAM_API_KEY` – livestream service API key
 
-4. **Run the backend server:**
+---
 
-```bash
-npm run start
-```
-
-5. **Run the frontend (if applicable):**
+### 4️⃣ Run the backend server
 
 ```bash
-npm run dev
+cd backend
+npm start
 ```
 
 ---
 
-## 🛠️ Tech Stack (Suggested Phase 1)
+### 5️⃣ Run the frontend
 
-* **Backend:** Node.js / Express / Django / Flask (any preferred framework)
-* **Frontend:** React / Vue / Angular (or plain HTML/JS)
+```bash
+cd frontend
+npm start
+```
+
+The frontend will start in development mode and run at:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 🛠️ Tech Stack (Phase 1 – Suggested)
+
+* **Backend:** Node.js + Express
+* **Frontend:** React (Create React App)
 * **Database:** MongoDB / PostgreSQL / MySQL
-* **Payments:** Razorpay / Stripe / PayPal sandbox
+* **Authentication:** JWT
+* **Payments:** Razorpay / Stripe (Sandbox)
 * **Livestream:** WebRTC / Agora / Vimeo Livestream API
-* **Authentication:** JWT / OAuth2
 
 ---
 
-## 📈 Roadmap (Future Phases)
+## 📁 Project Structure (High Level)
 
-* **Phase 2:** Expand features to include wedding vendors, photographers, makeup artists, caterers, and gift partners.
-* **Phase 3:** Full auditorium platform with listings, availability system, and booking management.
+```
+EventCompanionApp/
+├── backend/
+│   ├── index.js
+│   ├── routes/
+│   ├── controllers/
+│   ├── models/
+│   └── config/
+├── frontend/
+│   ├── public/
+│   └── src/
+├── docs/
+│   └── EventCompanionApp_FYP.pdf
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 📈 Roadmap
+
+### Phase 1 – Build the Base (Silent Entry)
+
+* Matrimonial service integration
+* User accounts & verification
+* Payments
+* Private livestream
+* Digital gifting
+
+### Phase 2 – Ecosystem Expansion
+
+* Wedding vendors
+* Photographers
+* Makeup artists
+* Caterers
+* Gift partners
+
+### Phase 3 – Auditorium Platform
+
+* Auditorium listings
+* Availability system
+* Booking management
 
 ---
 
 ## 🤝 Contribution
 
-Currently, Phase 1 is being developed by the project team for academic purposes (FYP). Contributions are welcome if aligned with Phase 1 scope.
+This project is currently being developed as a **Final Year Project (FYP)**.
+Contributions are welcome if they align with **Phase 1 scope and academic objectives**.
 
 ---
 
 ## 📄 License
 
 MIT License
-
