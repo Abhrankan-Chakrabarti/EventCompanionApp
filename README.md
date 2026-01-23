@@ -128,7 +128,8 @@ EventCompanionApp/
 │   │   │   └── AuthContext.jsx
 │   │   ├── pages/
 │   │   │   ├── Dashboard.jsx
-│   │   │   └── Login.jsx
+│   │   │   ├── Login.jsx
+│   │   │   └── Register.jsx
 │   │   └── services/
 │   │       └── authService.js
 │   ├── package.json
