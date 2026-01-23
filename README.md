@@ -101,15 +101,41 @@ http://localhost:3000
 EventCompanionApp/
 ├── backend/
 │   ├── index.js
-│   ├── routes/
+│   ├── package.json
+│   ├── config/
+│   │   └── db.js
 │   ├── controllers/
+│   │   └── auth.controller.js
+│   ├── middleware/
+│   │   └── auth.middleware.js
 │   ├── models/
-│   └── config/
+│   │   └── User.js
+│   └── routes/
+│       └── auth.routes.js
 ├── frontend/
 │   ├── public/
-│   └── src/
+│   │   ├── index.html
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   ├── src/
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   ├── components/
+│   │   │   └── ProtectedRoute.jsx
+│   │   ├── config/
+│   │   │   └── api.js
+│   │   ├── context/
+│   │   │   └── AuthContext.jsx
+│   │   ├── pages/
+│   │   │   ├── Dashboard.jsx
+│   │   │   └── Login.jsx
+│   │   └── services/
+│   │       └── authService.js
+│   ├── package.json
+│   └── README.md
 ├── docs/
 │   └── EventCompanionApp_FYP.pdf
+├── package.json
 ├── .gitignore
 └── README.md
 ```
