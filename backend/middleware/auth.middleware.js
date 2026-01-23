@@ -1,18 +1,24 @@
 import jwt from "jsonwebtoken";
 
-const authMiddleware = (req, res, next) => {
-  const token = req.header("Authorization")?.split(" ")[1];
+const protect = (req, res, next) => {
+  let token;
 
-  if (!token)
-    return res.status(401).json({ message: "No token, access denied" });
+  // Read token from cookie
+  if (req.cookies && req.cookies.token) {
+    token = req.cookies.token;
+  }
+
+  if (!token) {
+    return res.status(401).json({ message: "Not authorized, no token" });
+  }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+    req.user = { id: decoded.id };
     next();
   } catch (error) {
-    res.status(401).json({ message: "Invalid token" });
+    return res.status(401).json({ message: "Not authorized, token failed" });
   }
 };
 
-export default authMiddleware;
+export default protect;

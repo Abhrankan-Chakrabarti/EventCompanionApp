@@ -1,0 +1,12 @@
+{
+  "name": "event-companion-app",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm start --prefix frontend\" \"npm start --prefix backend\"",
+    "frontend": "npm start --prefix frontend",
+    "backend": "npm start --prefix backend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
