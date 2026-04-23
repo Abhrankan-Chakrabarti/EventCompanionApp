@@ -2,24 +2,14 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-/**
- * Helper: Generate JWT
- */
 const generateToken = (userId) => {
-  return jwt.sign(
-    { id: userId },
-    process.env.JWT_SECRET,
-    { expiresIn: "7d" }
-  );
+  return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-/**
- * @route   POST /api/auth/register
- * @access  Public
- */
 export const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    // Destructure matrimonialProfile from req.body
+    const { name, email, password, matrimonialProfile } = req.body;
 
     if (!name || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
@@ -36,20 +26,16 @@ export const register = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      // Initialize Phase 1 features if provided, else defaults apply
+      matrimonialProfile: matrimonialProfile || { isPublic: false }
     });
 
-    res.status(201).json({
-      message: "User registered successfully",
-    });
+    res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-/**
- * @route   POST /api/auth/login
- * @access  Public
- */
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -59,12 +45,7 @@ export const login = async (req, res) => {
     }
 
     const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: "Invalid credentials" });
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
+    if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
@@ -75,7 +56,7 @@ export const login = async (req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .json({
         message: "Login successful",
@@ -83,6 +64,10 @@ export const login = async (req, res) => {
           id: user._id,
           name: user.name,
           email: user.email,
+          role: user.role,
+          // Include these so the frontend can react to them immediately
+          matrimonialEnabled: user.matrimonialProfile?.isPublic || false,
+          walletBalance: user.walletBalance || 0
         },
       });
   } catch (error) {
@@ -90,10 +75,6 @@ export const login = async (req, res) => {
   }
 };
 
-/**
- * @route   POST /api/auth/logout
- * @access  Private
- */
 export const logout = async (req, res) => {
   res
     .clearCookie("token", {
@@ -104,18 +85,11 @@ export const logout = async (req, res) => {
     .json({ message: "Logged out successfully" });
 };
 
-/**
- * @route   GET /api/auth/me
- * @access  Private
- */
 export const getMe = async (req, res) => {
   try {
+    // This will now include the new fields like matrimonialProfile and walletBalance
     const user = await User.findById(req.user.id).select("-password");
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
+    if (!user) return res.status(404).json({ message: "User not found" });
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
