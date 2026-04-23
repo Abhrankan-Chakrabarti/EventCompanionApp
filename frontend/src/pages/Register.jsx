@@ -6,6 +6,8 @@ export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // Phase 1: Silent Opt-in for matrimonial features
+  const [isLooking, setIsLooking] = useState(false); 
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -13,7 +15,13 @@ export default function Register() {
     e.preventDefault();
     setError("");
     try {
-      await registerUser({ name, email, password });
+      // Send the matrimonial flag along with core data
+      await registerUser({ 
+        name, 
+        email, 
+        password, 
+        matrimonialProfile: { isPublic: isLooking } 
+      });
       alert("Registration successful! Please log in.");
       navigate("/login");
     } catch (err) {
@@ -50,6 +58,18 @@ export default function Register() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
+
+      {/* Phase 1: Subtle Matrimonial Integration */}
+      <div style={{ margin: "10px 0", fontSize: "0.9rem" }}>
+        <label>
+          <input
+            type="checkbox"
+            checked={isLooking}
+            onChange={(e) => setIsLooking(e.target.checked)}
+          />
+          {" "}Enable Matrimonial Discovery (Optional)
+        </label>
+      </div>
 
       <button type="submit">Register</button>
 
