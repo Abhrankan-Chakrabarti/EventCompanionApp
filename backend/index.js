@@ -3,7 +3,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
+
 import authRoutes from "./routes/auth.routes.js";
+import eventRoutes from "./routes/event.routes.js"; // ✅ ADD THIS
 
 dotenv.config();
 connectDB();
@@ -25,6 +27,7 @@ app.use(
 /* -------------------- ROUTES -------------------- */
 
 app.use("/api/auth", authRoutes);
+app.use("/api/events", eventRoutes); // ✅ ADD THIS
 
 app.get("/", (req, res) => {
   res.status(200).send("EventCompanionApp API running");
