@@ -105,13 +105,16 @@ EventCompanionApp/
 │   ├── config/
 │   │   └── db.js
 │   ├── controllers/
-│   │   └── auth.controller.js
+│   │   ├── auth.controller.js
+│   │   └── event.controller.js
 │   ├── middleware/
 │   │   └── auth.middleware.js
 │   ├── models/
-│   │   └── User.js
+│   │   ├── User.js
+│   │   └── Event.js
 │   └── routes/
-│       └── auth.routes.js
+│       ├── auth.routes.js
+│       └── event.routes.js
 ├── frontend/
 │   ├── public/
 │   │   ├── index.html
@@ -129,9 +132,11 @@ EventCompanionApp/
 │   │   ├── pages/
 │   │   │   ├── Dashboard.jsx
 │   │   │   ├── Login.jsx
-│   │   │   └── Register.jsx
+│   │   │   ├── Register.jsx
+│   │   │   └── CreateEvent.jsx
 │   │   └── services/
-│   │       └── authService.js
+│   │       ├── authService.js
+│   │       └── eventService.js
 │   ├── package.json
 │   └── README.md
 ├── docs/
